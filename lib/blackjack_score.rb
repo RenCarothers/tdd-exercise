@@ -48,9 +48,9 @@ def blackjack_score(hand)
   hand.map do |element|
     if VALID_CARDS.include?(element)
       case element
-      when 2, 3, 4, 5, 6, 7, 8, 9
+      when 2, 3, 4, 5, 6, 7, 8, 9, 10
         hand_score += element
-      when 'Jack', 'Queen', 'King', 10, 11, 12
+      when 'Jack', 'Queen', 'King'
         hand_score += 10
       when 'Ace', 1 # when there's an ace, wait to count ace until all other cards counted
         ace_count += 1
@@ -66,9 +66,9 @@ def blackjack_score(hand)
   end
 
   if ace_count > 0
-    ace_count.times do |x|
-        if hand_score + 11 > 21
-          if hand_score + 1 > 21
+    ace_count.times do
+        if hand_score + 11 >= 22
+          if hand_score + 1 >= 22
             raise ArgumentError.new("Hand score is over 21!")
           else
             hand_score += 1
@@ -79,7 +79,7 @@ def blackjack_score(hand)
       end
   end
 
-  if hand_score > 21
+  if hand_score >= 22
     raise ArgumentError.new("Hand score is over 21!")
   else
     return hand_score
@@ -88,6 +88,7 @@ def blackjack_score(hand)
   # If the array contains an invalid card value or the total exceeds 21, raise an ArgumentError.
   # # You should also raise an error if the hand contains more than 5 cards.
 end
+
 
 # below this line = testing for tests -->
 # # CORRECT OUTPUT

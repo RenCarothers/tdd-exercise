@@ -21,25 +21,29 @@ describe 'Blackjack Score' do
   it 'can calculate the score for a pair of number cards' do
     # Arrange
     hand = [3, 4]
-
     # Act
     score = blackjack_score(hand)
-
-    # Assert <-  You do this part!
+    # Assert
     expect(score).must_equal 7
 
+    expect(blackjack_score([10, 10])).must_equal 20
   end
 
   it 'calculates facecard values correctly' do
     hand = ['Queen', 5, 2]
     score = blackjack_score(hand)
     expect(score).must_equal 17
+
+    expect(blackjack_score(['Queen', 'Queen'])).must_equal 20
   end
 
   it 'calculates aces as 11 where it does not go over 21' do
     hand = ['Ace', 5, 2]
     score = blackjack_score(hand)
     expect(score).must_equal 18
+
+    expect(blackjack_score(['Ace', 'Ace', 'Ace'])).must_equal 13
+    expect(blackjack_score(['Ace', 'Queen'])).must_equal 21 # EDGE CASE
   end
 
   it 'calculates aces as 1, if an 11 would cause the score to go over 21' do
